@@ -1,24 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const useSignUpForm = (callback) => {
+const useSignUpForm = (callback, validate) => {
 
-    const initialInputs = ['', '', '', '']
+    const [values, setValues] = useState({});
+    const [errors, setErrors] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const [inputs, setInputs] = useState({initialInputs});
-
+    useEffect(() => { // This useEffect verifies if there is any error to call the callback function. The test happens every single time there is any change in the errors variable
+        if(Object.keys(errors).length === 0 && isSubmitting) {
+            callback();
+        }
+    }, [errors]);
+    
     const handleSubmit = event => {
-        event.preventDefault();
-        callback();
+        if (event) {
+            event.preventDefault();
+        }
+        setIsSubmitting(true);
+        setErrors(validate(values));
     };
     
     const handleInputChange = event => {
         event.persist();
-        setInputs(inputs => ({...inputs, [event.target.name]: event.target.value }));
+        setValues(values => ({...values, [event.target.name]: event.target.value }));
+        setErrors(validate(values));
     };
+
     return {
         handleSubmit,
         handleInputChange,
-        inputs
+        values,
+        errors,
     };
 };
 

@@ -1,61 +1,74 @@
 import React, { useState } from 'react';
+
 import useSignUpForm from '../../hooks/useSignUpForm';
+import validate from './SignUpFormValidationRules';
+import Button from '../Button/Button';
+import Input from '../Input/Input';
+import Label from '../Label/Label';
+
 
 const SignUpForm = () => {
 
-    const [error, setError] = useState(null);
-
     const onSubmit = () => {
         alert(`User Created!
-                username: ${inputs.username}
-                Email: ${inputs.email}`);
+                username: ${values.username}
+                Email: ${values.email}`);
     }
     
-    const { inputs, handleInputChange, handleSubmit } = useSignUpForm(onSubmit);
-
-    console.log(inputs.passwordOne);
-    console.log(inputs.passwordTwo);
-    console.log(inputs.username);
-    console.log(inputs.email);
-
-    const isInvalid = 
-        inputs.passwordOne !== inputs.passwordTwo ||
-        inputs.passwordOne === '' ||
-        inputs.email === '' ||
-        inputs.username === '';
+    const { values, handleInputChange, handleSubmit, errors } = useSignUpForm(onSubmit, validate);
 
     return(
         <form onSubmit={handleSubmit}>
-            <input
+            <Label>Nome</Label>
+            <Input
+                className={`${errors.username && 'alert'}`}
                 name="username"
-                value={inputs.username}
+                value={values.username || ''}
                 onChange={handleInputChange}
                 type="text"
                 placeholder="Full Name"
             />
-            <input
+            {errors.username && (
+                <p>{errors.username}</p>
+            )}
+            <Label>Email</Label>
+            <Input
+                className={`${errors.email && 'alert'}`}
                 name="email"
-                value={inputs.email}
+                value={values.email || ''}
                 onChange={handleInputChange}
                 type="text"
                 placeholder="E-mail"
             />
-            <input
+            {errors.email && (
+                <p>{errors.email}</p>
+            )}
+            <Label>Senha</Label>
+            <Input
+                className={`${errors.passwordOne && 'alert'}`}
                 name="passwordOne"
-                value={inputs.passwordOne}
+                value={values.passwordOne || ''}
                 onChange={handleInputChange}
                 type="password"
                 placeholder="Password"
             />
-            <input
+            {errors.passwordOne && (
+                <p>{errors.passwordOne}</p>
+            )}
+            <Label>Confirmar Senha</Label>
+            <Input
+                className={`${errors.passwordTwo && 'alert'}`}
                 name="passwordTwo"
-                value={inputs.passwordTwo}
+                value={values.passwordTwo || ''}
                 onChange={handleInputChange}
                 type="password"
                 placeholder="Confirm Password"
             />
-            <button type="submit" disabled={isInvalid}>Sign Up</button>
-            {error && <p>{error.message}</p>}
+            {errors.passwordTwo && (
+                <p>{errors.passwordTwo}</p>
+            )}
+            <Button type="submit">Sign Up</Button>
+            {/*{error && <p>{error.message}</p>}*/}
         </form>
     );
 }
