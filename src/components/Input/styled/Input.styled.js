@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const color = '#3F51B5';
 
 export const StyledInput = styled.input`
+    display: block;
     padding: 0.5em;
     margin: 10px;
     color: #495057;
