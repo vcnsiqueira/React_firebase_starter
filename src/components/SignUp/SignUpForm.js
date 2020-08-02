@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import SignUpImage from '../../assets/images/signup-image.jpg';
-import './SignUp.css';
+import React from 'react';
+import SignupImage from '../../assets/images/back_image.jpg';
+import { SignupFormContainer, SignupFormWrapper, SignupFormImage } from './styled/SignupForm.styled';
 
 import useSignUpForm from '../../hooks/useSignUpForm';
 import validate from './SignUpFormValidationRules';
@@ -18,8 +18,9 @@ const SignUpForm = () => {
     const { values, handleInputChange, handleSubmit, errors } = useSignUpForm(onSubmit, validate);
 
     return(
-        <div className="SignUp_wrapper">
-            <div className="SignUp_form">
+        <SignupFormContainer>
+            <SignupFormWrapper>
+                <h1>Registrar</h1>
                 <form onSubmit={handleSubmit}>
                     <Input
                         className={`${errors.username && 'alert'}`}
@@ -27,7 +28,7 @@ const SignUpForm = () => {
                         value={values.username || ''}
                         onChange={handleInputChange}
                         type="text"
-                        placeholder="Full Name"
+                        placeholder="Nome Completo"
                     />
                     {errors.username && (
                         <p>{errors.username}</p>
@@ -49,7 +50,7 @@ const SignUpForm = () => {
                         value={values.passwordOne || ''}
                         onChange={handleInputChange}
                         type="password"
-                        placeholder="Password"
+                        placeholder="Senha"
                     />
                     {errors.passwordOne && (
                         <p>{errors.passwordOne}</p>
@@ -60,19 +61,17 @@ const SignUpForm = () => {
                         value={values.passwordTwo || ''}
                         onChange={handleInputChange}
                         type="password"
-                        placeholder="Confirm Password"
+                        placeholder="Confirme sua senha"
                     />
                     {errors.passwordTwo && (
                         <p>{errors.passwordTwo}</p>
                     )}
-                    <Button type="submit">Sign Up</Button>
+                    <Button type="submit">Registrar</Button>
                     {/*{error && <p>{error.message}</p>}*/}
                 </form>
-            </div>
-            <div className="SignUp_image">
-                <img src={SignUpImage} alt="SignUp image"/>
-            </div>
-        </div>
+            </SignupFormWrapper>
+            <SignupFormImage background={SignupImage}/>
+        </SignupFormContainer>
     );
 }
 

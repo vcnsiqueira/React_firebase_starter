@@ -5,7 +5,6 @@ import SignUpForm from './SignUpForm';
 const SignUpPage = () => {
     return(
         <div>
-            <h1>SignUp</h1>
             <SignUpForm />
         </div>
     );

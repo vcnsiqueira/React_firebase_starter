@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const useSignUpForm = (callback, validate) => {
 
@@ -17,7 +17,7 @@ const useSignUpForm = (callback, validate) => {
         if(Object.keys(errors).length !== 0 && isChanging) {
             console.log(values);
             setErrors(validate(values));
-            setIsSubmitting(false);     // this code guarantees that we do not call the callback function
+            setIsSubmitting(false);     // this code guarantees that we only call the callback function when the user clicks to submit the form
         }
     }, [values])
     

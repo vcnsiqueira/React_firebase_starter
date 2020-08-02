@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import './App.css';
 
 import Navigation from '../Navigation';
 import Landing from '../Landing';
@@ -17,7 +18,6 @@ const App = () => {
     return (
         <Router>
             <Navigation />
-            <hr />
             <Switch>
                 <Route exact path={ROUTES.LANDING} component={Landing} />
                 <Route path={ROUTES.SIGN_UP} component={SignUpPage} />

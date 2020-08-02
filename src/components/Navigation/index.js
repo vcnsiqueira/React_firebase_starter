@@ -1,32 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { NavigationList, NavigationListItem } from './styled/Navigation.styled';
 
 import * as ROUTES from '../../constants/routes';
 
 const Navigation = () => {
     return(
-        <div>
-            <ul>
-                <li>
-                    <Link to={ROUTES.SIGN_IN}>Sign In</Link>
-                </li>
-                <li>
-                    <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
-                </li>
-                <li>
-                    <Link to={ROUTES.LANDING}>Landing</Link>
-                </li>
-                <li>
-                    <Link to={ROUTES.HOME}>Home</Link>
-                </li>
-                <li>
-                    <Link to={ROUTES.ACCOUNT}>Account</Link>
-                </li>
-                <li>
-                    <Link to={ROUTES.ADMIN}>Admin</Link>
-                </li>
-            </ul>
-        </div>
+        <nav>
+            <NavigationList>
+                <NavigationListItem>
+                    Marca
+                </NavigationListItem>
+                <NavigationListItem>
+                    <Link to={ROUTES.SIGN_IN} style={{textDecoration: 'none', color: 'white'}}>Sign In</Link>
+                </NavigationListItem>
+                <NavigationListItem>
+                    <Link to={ROUTES.SIGN_UP} style={{textDecoration: 'none', color: 'white'}}>Sign Up</Link>
+                </NavigationListItem>
+                <NavigationListItem>
+                    <Link to={ROUTES.LANDING} style={{textDecoration: 'none', color: 'white'}}>Landing</Link>
+                </NavigationListItem>
+                <NavigationListItem>
+                    <Link to={ROUTES.HOME} style={{textDecoration: 'none', color: 'white'}}>Home</Link>
+                </NavigationListItem>
+                <NavigationListItem>
+                    <Link to={ROUTES.ACCOUNT} style={{textDecoration: 'none', color: 'white'}}>Account</Link>
+                </NavigationListItem>
+                <NavigationListItem>
+                    <Link to={ROUTES.ADMIN} style={{textDecoration: 'none', color: 'white'}}>Admin</Link>
+                </NavigationListItem>
+            </NavigationList>
+        </nav>
     );
 };
 
