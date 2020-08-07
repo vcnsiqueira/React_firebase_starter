@@ -22,7 +22,16 @@ class Firebase {
     // *** Auth API ***
 
     doCreateUserWithEmailAndPassword = (email, password) => { // Sign up method
-        this.auth.createUserWithEmailAndPassword(email, password);
+        this.auth.createUserWithEmailAndPassword(email, password)
+        /*.then(res => {
+            console.log(res);
+            alert(`Seja bem-vindo ${email}!`);
+
+          })
+          .catch(err => {
+            console.error(err)
+            alert(err.message)
+          })*/
     };
 
     doSignInWithEmailAndPassword = (email, password) => { // Sign in method
@@ -42,8 +51,5 @@ class Firebase {
     }
 
 }
-
-
-
 
 export default Firebase;
