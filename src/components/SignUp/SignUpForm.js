@@ -11,7 +11,7 @@ import { SignupFormContainer, SignupFormWrapper, SignupFormImage } from './style
 import SignInLink from '../SignIn/SignInLink'; 
 
 import validate from './SignUpFormValidationRules';
-import Button from '../Button/Button';
+import ButtonAuth from '../Button/ButtonAuth';
 import Input from '../Input/Input';
 
 const SignUpFormBase = (props) => {
@@ -104,7 +104,7 @@ const SignUpFormBase = (props) => {
                     {errors.passwordTwo && (
                         <p>{errors.passwordTwo}</p>
                     )}
-                    <Button type="submit">Registrar</Button>
+                    <ButtonAuth type="submit">Registrar</ButtonAuth>
                 </form>
                 <SignInLink/>
             </SignupFormWrapper>

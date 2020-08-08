@@ -7,11 +7,11 @@ import * as ROUTES from '../../constants/routes';
 
 import SignInImage from '../../assets/images/signin_image.jpg';
 
-import { SignInFormContainer, SignInFormWrapper, SignInFormImage } from './styled/SignInForm.styled';
+import { SignInFormContainer, SignInFormWrapper, SignInFormImage, SignInFormButton } from './styled/SignInForm.styled';
 import SignUpLink from '../SignUp/SignUpLink';
 
 import validateSignIn from './SignInFormValidationRules';
-import Button from '../Button/Button';
+import ButtonAuth from '../Button/ButtonAuth';
 import Input from '../Input/Input';
 
 const SignInFormBase = (props) => {
@@ -78,7 +78,7 @@ const SignInFormBase = (props) => {
                     {errors.password && (
                         <p>{errors.password}</p>
                     )}
-                    <Button type="submit">Entrar</Button>
+                    <ButtonAuth type="submit">Entrar</ButtonAuth>                    
                 </form>
                 <SignUpLink />
             </SignInFormWrapper>

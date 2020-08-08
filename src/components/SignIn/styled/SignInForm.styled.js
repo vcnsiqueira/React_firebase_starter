@@ -46,6 +46,10 @@ export const SignInFormImage = styled.div`
     border-radius: 0 10px 10px 0;
 `;
 
+export const SignInFormButton = styled.div`
+    margin: 1.2rem 0.3rem 0 0;
+`
+
 export const SignInLinkStyled = styled.div`
     font-size: 1rem;
     position: absolute;

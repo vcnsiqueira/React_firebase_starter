@@ -4,6 +4,8 @@ import { NavigationList, NavigationListItem } from './styled/Navigation.styled';
 
 import * as ROUTES from '../../constants/routes';
 
+import SignOut from '../SignOut';
+
 const Navigation = () => {
     return(
         <nav>
@@ -13,9 +15,6 @@ const Navigation = () => {
                 </NavigationListItem>
                 <NavigationListItem>
                     <Link to={ROUTES.SIGN_IN} style={{textDecoration: 'none', color: 'white'}}>Sign In</Link>
-                </NavigationListItem>
-                <NavigationListItem>
-                    <Link to={ROUTES.SIGN_UP} style={{textDecoration: 'none', color: 'white'}}>Sign Up</Link>
                 </NavigationListItem>
                 <NavigationListItem>
                     <Link to={ROUTES.LANDING} style={{textDecoration: 'none', color: 'white'}}>Landing</Link>
@@ -28,6 +27,9 @@ const Navigation = () => {
                 </NavigationListItem>
                 <NavigationListItem>
                     <Link to={ROUTES.ADMIN} style={{textDecoration: 'none', color: 'white'}}>Admin</Link>
+                </NavigationListItem>
+                <NavigationListItem>
+                    <SignOut />
                 </NavigationListItem>
             </NavigationList>
         </nav>

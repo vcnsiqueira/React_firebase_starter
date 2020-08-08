@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import { StyledButton } from './styled/Button.styled.js';
 
-const Button = ({ variant, color, onClick, children }) => {
+const Button = ({ type, variant, color, onClick, children }) => {
     return(
-        <StyledButton variant={variant} color={color} onClick={onClick}>
+        <StyledButton type={type} variant={variant} color={color} onClick={onClick}>
             {children}
         </StyledButton>
     );
@@ -13,12 +13,13 @@ const Button = ({ variant, color, onClick, children }) => {
 
 Button.defaultProps = {
     variant: 'solid',
-    color: '#66BB6A',
+    type: 'button',
 };
 
 Button.propTypes = {
     variant: PropTypes.string,
     color: PropTypes.string,
+    type: PropTypes.string,
     onClick: PropTypes.func,
     children: PropTypes.node.isRequired,
 };
