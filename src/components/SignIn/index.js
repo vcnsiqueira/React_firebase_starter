@@ -1,9 +1,12 @@
 import React from 'react';
 
+import SignUpLink from '../SignUp/SignUpLink';
+import SignInForm from './SignInForm';
+
 const SignIn = () => {
     return(
         <div>
-            <h1>Empty page</h1>
+            <SignInForm />
         </div>
     );
 };

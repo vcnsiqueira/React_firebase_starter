@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SignupFormContainer = styled.div`
+export const SignInFormContainer = styled.div`
     position: relative;
     margin: 5% auto;
     width: 800px;
@@ -10,7 +10,7 @@ export const SignupFormContainer = styled.div`
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 `;
 
-export const SignupFormWrapper = styled.div`
+export const SignInFormWrapper = styled.div`
     position: absolute;
     top: 0;
     left: 0;
@@ -32,7 +32,7 @@ export const SignupFormWrapper = styled.div`
     }
 `;
 
-export const SignupFormImage = styled.div`
+export const SignInFormImage = styled.div`
     position: absolute;
     top: 0;
     right: 0;
@@ -46,7 +46,7 @@ export const SignupFormImage = styled.div`
     border-radius: 0 10px 10px 0;
 `;
 
-export const SignUpLinkStyled = styled.div`
+export const SignInLinkStyled = styled.div`
     font-size: 1rem;
     position: absolute;
     bottom: 20px;

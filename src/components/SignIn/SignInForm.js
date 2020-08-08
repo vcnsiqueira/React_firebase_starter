@@ -5,39 +5,35 @@ import { compose } from 'recompose';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
-import SignupImage from '../../assets/images/signup_image.jpg';
+import SignInImage from '../../assets/images/signin_image.jpg';
 
-import { SignupFormContainer, SignupFormWrapper, SignupFormImage } from './styled/SignUpForm.styled';
-import SignInLink from '../SignIn/SignInLink'; 
+import { SignInFormContainer, SignInFormWrapper, SignInFormImage } from './styled/SignInForm.styled';
+import SignUpLink from '../SignUp/SignUpLink';
 
-import validate from './SignUpFormValidationRules';
+import validateSignIn from './SignInFormValidationRules';
 import Button from '../Button/Button';
 import Input from '../Input/Input';
 
-const SignUpFormBase = (props) => {
+const SignInFormBase = (props) => {
 
-    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [passwordOne, setPasswordOne] = useState('');
-    const [passwordTwo, setPasswordTwo] = useState('');
+    const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
     
     useEffect(() => { // Every time the values change (input changes, for instance), we update the errors. This is being done because we want changes in the ui at every input change.
         if(Object.keys(errors).length !== 0) {
             //console.log([username, email, passwordOne, passwordTwo]);
-            setErrors(validate(username, email, passwordOne, passwordTwo));
+            setErrors(validateSignIn(email, password));
         }
-    }, [username, email, passwordOne, passwordTwo]);
+    }, [email, password]);
 
     const onSubmit = async () => {
         try {
-            await props.firebase.doCreateUserWithEmailAndPassword(email, passwordOne)
-            alert('Usuário cadastrado com sucesso')
-            setUsername('');
+            await props.firebase.doSignInWithEmailAndPassword(email, password)
+            alert('Sign in working!')
             setEmail('');
-            setPasswordOne('');
-            setPasswordTwo('');
-            props.history.push(ROUTES.SIGN_IN)
+            setPassword('');
+            props.history.push(ROUTES.HOME);
         } catch(error) {
             console.log(error.message);
         };
@@ -48,7 +44,7 @@ const SignUpFormBase = (props) => {
     
     const handleSubmit = event => {
         event.preventDefault();
-        let newErrors = validate(username, email, passwordOne, passwordTwo);
+        let newErrors = validateSignIn(email, password);
         setErrors(newErrors);
         if(Object.keys(newErrors).length === 0) {
             onSubmit();
@@ -56,21 +52,10 @@ const SignUpFormBase = (props) => {
     };
 
     return(
-        <SignupFormContainer>
-            <SignupFormWrapper>
-                <h1>Registrar</h1>
+        <SignInFormContainer>
+            <SignInFormWrapper>
+                <h1>Entrar</h1>
                 <form onSubmit={handleSubmit}>
-                    <Input
-                        className={`${errors.username && 'alert'}`}
-                        name="username"
-                        value={username}
-                        onChange={event => setUsername(event.target.value)}
-                        type="text"
-                        placeholder="Nome Completo"
-                    />
-                    {errors.username && (
-                        <p>{errors.username}</p>
-                    )}
                     <Input
                         className={`${errors.email && 'alert'}`}
                         name="email"
@@ -83,41 +68,30 @@ const SignUpFormBase = (props) => {
                         <p>{errors.email}</p>
                     )}
                     <Input
-                        className={`${errors.passwordOne && 'alert'}`}
+                        className={`${errors.password && 'alert'}`}
                         name="passwordOne"
-                        value={passwordOne}
-                        onChange={event => setPasswordOne(event.target.value)}
+                        value={password}
+                        onChange={event => setPassword(event.target.value)}
                         type="password"
                         placeholder="Senha"
                     />
-                    {errors.passwordOne && (
-                        <p>{errors.passwordOne}</p>
+                    {errors.password && (
+                        <p>{errors.password}</p>
                     )}
-                    <Input
-                        className={`${errors.passwordTwo && 'alert'}`}
-                        name="passwordTwo"
-                        value={passwordTwo}
-                        onChange={event => setPasswordTwo(event.target.value)}
-                        type="password"
-                        placeholder="Confirme sua senha"
-                    />
-                    {errors.passwordTwo && (
-                        <p>{errors.passwordTwo}</p>
-                    )}
-                    <Button type="submit">Registrar</Button>
+                    <Button type="submit">Entrar</Button>
                 </form>
-                <SignInLink/>
-            </SignupFormWrapper>
-            <SignupFormImage background={SignupImage}/>
-        </SignupFormContainer>
+                <SignUpLink />
+            </SignInFormWrapper>
+            <SignInFormImage background={SignInImage}/>
+        </SignInFormContainer>
     );
 
 };
 
-const SignUpForm = compose(
+const SignInForm = compose(
     withRouter,
     withFirebase,
-)(SignUpFormBase);
+)(SignInFormBase);
 
 
 
@@ -203,4 +177,4 @@ const SignUpForm = compose(
 
 const SignUpForm = compose(withRouter, withFirebase)(SignUpFormBase);*/
 
-export default SignUpForm;
+export default SignInForm;
