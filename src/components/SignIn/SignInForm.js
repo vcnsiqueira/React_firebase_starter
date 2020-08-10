@@ -27,19 +27,18 @@ const SignInFormBase = (props) => {
         }
     }, [email, password]);
 
-    const onSubmit = async () => {
-        try {
-            await props.firebase.doSignInWithEmailAndPassword(email, password)
-            alert('Sign in working!')
-            setEmail('');
-            setPassword('');
-            props.history.push(ROUTES.HOME);
-        } catch(error) {
-            console.log(error.message);
-        };
-        /*alert(`User Created!
-                username: ${username}
-                Email: ${email}`);*/
+    const onSubmit = event => {
+        props.firebase.doSignInWithEmailAndPassword(email, password)
+            .then(() => {
+                alert('Colocar um loader!');
+                setEmail('');
+                setPassword('');
+                props.history.push(ROUTES.HOME);
+            })
+            .catch(error => {
+                console.error(error.message);
+                alert('Tem certeza que este usuário está registrado? Se não, faça o registro!')
+            });
     }
     
     const handleSubmit = event => {

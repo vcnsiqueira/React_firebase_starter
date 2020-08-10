@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { withFirebase } from '../Firebase';
 import './App.css';
 
 import Navigation from '../Navigation';
@@ -14,10 +15,22 @@ import Error from '../Error';
 
 import * as ROUTES from '../../constants/routes';
 
-const App = () => {
+const App = (props) => {
+
+    const [authUser, setAuthUser] = useState({ loggedIn: false });
+
+    useEffect(() => {
+        console.log('Entrou!')
+        props.firebase.auth.onAuthStateChanged(authUser => {
+            authUser
+                ? setAuthUser({ loggedIn: true })
+                : setAuthUser({ loggedIn: false });
+        })
+    }, []);
+
     return (
         <Router>
-            <Navigation />
+            <Navigation authUser={authUser}/>
             <Switch>
                 <Route exact path={ROUTES.LANDING} component={Landing} />
                 <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
@@ -32,4 +45,4 @@ const App = () => {
     )
 }
 
-export default App;
+export default withFirebase(App);

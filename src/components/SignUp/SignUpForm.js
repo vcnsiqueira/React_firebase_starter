@@ -29,21 +29,20 @@ const SignUpFormBase = (props) => {
         }
     }, [username, email, passwordOne, passwordTwo]);
 
-    const onSubmit = async () => {
-        try {
-            await props.firebase.doCreateUserWithEmailAndPassword(email, passwordOne)
-            alert('Usuário cadastrado com sucesso')
-            setUsername('');
-            setEmail('');
-            setPasswordOne('');
-            setPasswordTwo('');
-            props.history.push(ROUTES.SIGN_IN)
-        } catch(error) {
-            console.log(error.message);
-        };
-        /*alert(`User Created!
-                username: ${username}
-                Email: ${email}`);*/
+    const onSubmit = event => {
+        props.firebase.doCreateUserWithEmailAndPassword(email, passwordOne)
+            .then(authUser => {
+                alert("Usuário cadastrado com sucesso!");
+                setUsername('');
+                setEmail('');
+                setPasswordOne('');
+                setPasswordTwo('');
+                props.history.push(ROUTES.SIGN_IN);
+            })
+            .catch(error => {
+                console.error(error.message);
+                alert('Este e-mail já está cadastrado. Clique em entrar');
+            });
     }
     
     const handleSubmit = event => {

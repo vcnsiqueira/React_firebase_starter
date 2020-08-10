@@ -9,7 +9,7 @@ export const StyledButton = styled.button`
     color: ${(props) => props.variant !== 'outlined' ? '#FFFFFF' : props.color ? props.color : defaultColor};
     border-radius: 3px;
     padding: 0.6rem 1rem;
-    margin: 0.3rem;
+    margin: 0 0.3rem;
     font-weight: bold;
     &:hover {
         background-color: ${hoverColor};

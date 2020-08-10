@@ -6,15 +6,25 @@ import * as ROUTES from '../../constants/routes';
 
 import SignOut from '../SignOut';
 
-const Navigation = () => {
+const Navigation = ({ authUser }) => {
+    return(
+        <div>
+            {
+                console.log(authUser.loggedIn)
+            }
+            {
+                authUser.loggedIn ? <NavigationAuth /> : <NavigationNonAuth />
+            }
+        </div>
+   );
+}
+
+const NavigationAuth = () => {
     return(
         <nav>
             <NavigationList>
                 <NavigationListItem>
                     Marca
-                </NavigationListItem>
-                <NavigationListItem>
-                    <Link to={ROUTES.SIGN_IN} style={{textDecoration: 'none', color: 'white'}}>Sign In</Link>
                 </NavigationListItem>
                 <NavigationListItem>
                     <Link to={ROUTES.LANDING} style={{textDecoration: 'none', color: 'white'}}>Landing</Link>
@@ -35,5 +45,23 @@ const Navigation = () => {
         </nav>
     );
 };
+
+const NavigationNonAuth = () => {
+    return(
+        <nav>
+            <NavigationList>
+                <NavigationListItem>
+                    Marca
+                </NavigationListItem>
+                <NavigationListItem>
+                    <Link to={ROUTES.LANDING} style={{textDecoration: 'none', color: 'white'}}>Landing</Link>
+                </NavigationListItem>
+                <NavigationListItem>
+                    <Link to={ROUTES.SIGN_IN} style={{textDecoration: 'none', color: 'white'}}>Sign In</Link>
+                </NavigationListItem>
+            </NavigationList>
+        </nav>
+    );
+}
 
 export default Navigation;

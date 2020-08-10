@@ -21,34 +21,26 @@ class Firebase {
 
     // *** Auth API ***
 
-    doCreateUserWithEmailAndPassword = (email, password) => { // Sign up method
+    doCreateUserWithEmailAndPassword = (email, password) => // Sign up method
         this.auth.createUserWithEmailAndPassword(email, password)
-        /*.then(res => {
-            console.log(res);
-            alert(`Seja bem-vindo ${email}!`);
 
-          })
-          .catch(err => {
-            console.error(err)
-            alert(err.message)
-          })*/
-    };
-
-    doSignInWithEmailAndPassword = (email, password) => { // Sign in method
+    doSignInWithEmailAndPassword = (email, password) => // Sign in method
         this.auth.signInWithEmailAndPassword(email, password);
-    };
 
-    doSignOut = () => { // Sign out method
-        this.auth.signOut();
-    };
+    doSignOut = () => // Sign out method
+        this.auth.signOut()
+            /*.then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.error(err);
+            })*/
 
-    doPasswordReset = email => {
+    doPasswordReset = email =>
         this.auth.sendPasswordResetEmail(email);
-    };
 
-    doPasswordUpdate = password => {
+    doPasswordUpdate = password => 
         this.auth.currentUsers.updatePassword(password);
-    }
 
 }
 
