@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import { withFirebase } from '../Firebase';
+import { withAuthentication } from '../Session';
 import './App.css';
 
 import Navigation from '../Navigation';
@@ -15,22 +15,11 @@ import Error from '../Error';
 
 import * as ROUTES from '../../constants/routes';
 
-const App = (props) => {
-
-    const [authUser, setAuthUser] = useState({ loggedIn: false });
-
-    useEffect(() => {
-        console.log('Entrou!')
-        props.firebase.auth.onAuthStateChanged(authUser => {
-            authUser
-                ? setAuthUser({ loggedIn: true })
-                : setAuthUser({ loggedIn: false });
-        })
-    }, []);
+const App = () => {
 
     return (
         <Router>
-            <Navigation authUser={authUser}/>
+            <Navigation />
             <Switch>
                 <Route exact path={ROUTES.LANDING} component={Landing} />
                 <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
@@ -45,4 +34,4 @@ const App = (props) => {
     )
 }
 
-export default withFirebase(App);
+export default withAuthentication(App);
