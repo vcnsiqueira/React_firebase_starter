@@ -9,6 +9,7 @@ import SignInImage from '../../assets/images/signin_image.jpg';
 
 import { SignInFormContainer, SignInFormWrapper, SignInFormImage, SignInFormButton } from './styled/SignInForm.styled';
 import SignUpLink from '../SignUp/SignUpLink';
+import PasswordForgetLink from '../PasswordForget/PasswordForgetLink';
 
 import validateSignIn from './SignInFormValidationRules';
 import ButtonAuth from '../Button/ButtonAuth';
@@ -79,6 +80,7 @@ const SignInFormBase = (props) => {
                     )}
                     <ButtonAuth type="submit">Entrar</ButtonAuth>                    
                 </form>
+                <PasswordForgetLink />
                 <SignUpLink />
             </SignInFormWrapper>
             <SignInFormImage background={SignInImage}/>

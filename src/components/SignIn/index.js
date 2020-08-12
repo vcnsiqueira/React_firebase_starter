@@ -1,6 +1,5 @@
 import React from 'react';
 
-import SignUpLink from '../SignUp/SignUpLink';
 import SignInForm from './SignInForm';
 
 const SignIn = () => {
