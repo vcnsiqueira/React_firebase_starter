@@ -20,7 +20,7 @@ export const NavigationList = styled.ul`
 export const NavigationListItem = styled.li`
     float: right;
     color: white;
-    padding: 15px;
+    padding: 10px;
     text-decoration: none;
     &:first-child {
         flex: 1;

@@ -6,6 +6,7 @@ import { AuthUserContext } from '../Session';
 import * as ROUTES from '../../constants/routes';
 
 import SignOut from '../SignOut';
+import Button from '../Button/Button';
 
 const Navigation = () => {
     return(
@@ -27,9 +28,6 @@ const NavigationAuth = () => {
                     Marca
                 </NavigationListItem>
                 <NavigationListItem>
-                    <Link to={ROUTES.LANDING} style={{textDecoration: 'none', color: 'white'}}>Landing</Link>
-                </NavigationListItem>
-                <NavigationListItem>
                     <Link to={ROUTES.HOME} style={{textDecoration: 'none', color: 'white'}}>Home</Link>
                 </NavigationListItem>
                 <NavigationListItem>
@@ -40,6 +38,9 @@ const NavigationAuth = () => {
                 </NavigationListItem>
                 <NavigationListItem>
                     <SignOut />
+                </NavigationListItem>
+                <NavigationListItem>
+                    <i className="fas fa-user-circle fa-2x"></i>
                 </NavigationListItem>
             </NavigationList>
         </nav>
@@ -54,10 +55,18 @@ const NavigationNonAuth = () => {
                     Marca
                 </NavigationListItem>
                 <NavigationListItem>
-                    <Link to={ROUTES.LANDING} style={{textDecoration: 'none', color: 'white'}}>Landing</Link>
+                    <Link to={ROUTES.SIGN_UP} style={{textDecoration: 'none', color: 'white'}}>
+                        <Button type="button" color="#e53935" variant="solid">
+                            Registrar
+                        </Button>
+                    </Link>
                 </NavigationListItem>
                 <NavigationListItem>
-                    <Link to={ROUTES.SIGN_IN} style={{textDecoration: 'none', color: 'white'}}>Sign In</Link>
+                    <Link to={ROUTES.SIGN_IN} style={{textDecoration: 'none', color: 'white'}}>
+                        <Button type="button" color="#e53935" variant="solid">
+                            Entrar
+                        </Button>
+                    </Link>
                 </NavigationListItem>
             </NavigationList>
         </nav>

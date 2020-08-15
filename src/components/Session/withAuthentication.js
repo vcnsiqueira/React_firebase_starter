@@ -10,12 +10,11 @@ const withAuthentication = Component => {
         const [authUser, setAuthUser] = useState(false);
 
         useEffect(() => {
-            console.log('Entrou!')
             props.firebase.auth.onAuthStateChanged(authUser => {
                 authUser
                     ? setAuthUser(true)
                     : setAuthUser(false);
-            })
+            });
         }, []);
     
         return(

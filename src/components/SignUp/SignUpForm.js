@@ -32,6 +32,16 @@ const SignUpFormBase = (props) => {
     const onSubmit = event => {
         props.firebase.doCreateUserWithEmailAndPassword(email, passwordOne)
             .then(authUser => {
+                // Creating the user into Firebase Firestore database
+                return props.firebase.db
+                    .collection('users')
+                    .doc(authUser.user.uid)
+                    .set({
+                        name: username,
+                        email: email,
+                    });
+            })
+            .then(() => {
                 alert("Usuário cadastrado com sucesso!");
                 setUsername('');
                 setEmail('');
