@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { NavigationList, NavigationListItem } from './styled/Navigation.styled';
+import { NavigationBar, NavigationBrand, NavigationLogo, NavigationItems, NavigationList, NavigationListItem } from './styled/Navigation.styled';
 import { AuthUserContext } from '../Session';
 
 import * as ROUTES from '../../constants/routes';
@@ -22,6 +22,69 @@ const Navigation = () => {
 
 const NavigationAuth = () => {
     return(
+        <NavigationBar>
+            <NavigationBrand>
+                <h1>Marca</h1>
+            </NavigationBrand>
+            <NavigationLogo>
+                <h1>Logo</h1>
+            </NavigationLogo>
+            <NavigationItems>
+                <NavigationList>
+                    <NavigationListItem>
+                        <Link to={ROUTES.HOME}>Home</Link>
+                    </NavigationListItem>
+                    <NavigationListItem>
+                        <Link to={ROUTES.ACCOUNT}>Account</Link>
+                    </NavigationListItem>
+                    <NavigationListItem>
+                        <Link to={ROUTES.ADMIN}>Admin</Link>
+                    </NavigationListItem>
+                    <NavigationListItem>
+                        <i className="fas fa-user-circle fa-2x"/>
+                    </NavigationListItem>
+                    <NavigationListItem>
+                        <SignOut/>
+                    </NavigationListItem>
+                </NavigationList>
+            </NavigationItems>
+        </NavigationBar>
+    );
+}
+
+const NavigationNonAuth = () => {
+    return(
+        <NavigationBar>
+            <NavigationBrand>
+                <h1>Marca</h1>
+            </NavigationBrand>
+            <NavigationLogo>
+                <h1>Logo</h1>
+            </NavigationLogo>
+            <NavigationItems>
+                <NavigationList>
+                    <NavigationListItem>
+                        <Link to={ROUTES.SIGN_UP}>
+                            <Button type="button" color="#e53935" variant="solid">
+                                Registrar
+                            </Button>
+                        </Link>
+                    </NavigationListItem>
+                    <NavigationListItem>
+                        <Link to={ROUTES.SIGN_IN}>
+                            <Button type="button" color="#e53935" variant="solid">
+                                Entrar
+                            </Button>
+                        </Link>
+                    </NavigationListItem>
+                </NavigationList>
+            </NavigationItems>
+        </NavigationBar>
+    );
+}
+
+/*const NavigationAuth = () => {
+    return(
         <nav>
             <NavigationList>
                 <NavigationListItem>
@@ -39,7 +102,7 @@ const NavigationAuth = () => {
                 <NavigationListItem>
                     <SignOut />
                 </NavigationListItem>
-                <NavigationListItem>
+                <NavigationListItem className="dropdown">
                     <i className="fas fa-user-circle fa-2x"></i>
                 </NavigationListItem>
             </NavigationList>
@@ -71,6 +134,6 @@ const NavigationNonAuth = () => {
             </NavigationList>
         </nav>
     );
-}
+}*/
 
 export default Navigation;

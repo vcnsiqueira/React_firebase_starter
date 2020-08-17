@@ -20,16 +20,18 @@ const App = () => {
     return (
         <Router>
             <Navigation />
-            <Switch>
-                <Route exact path={ROUTES.LANDING} component={Landing} />
-                <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
-                <Route path={ROUTES.SIGN_IN} component={SignIn} />
-                <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
-                <Route path={ROUTES.HOME} component={Home} />
-                <Route path={ROUTES.ACCOUNT} component={Account} />
-                <Route path={ROUTES.ADMIN} component={Admin} />
-                <Route component={Error} />
-            </Switch>
+            <main className="main-content">
+                <Switch>
+                    <Route exact path={ROUTES.LANDING} component={Landing} />
+                    <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
+                    <Route path={ROUTES.SIGN_IN} component={SignIn} />
+                    <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
+                    <Route path={ROUTES.HOME} component={Home} />
+                    <Route path={ROUTES.ACCOUNT} component={Account} />
+                    <Route path={ROUTES.ADMIN} component={Admin} />
+                    <Route component={Error} />
+                </Switch>
+            </main>
         </Router>
     )
 }
