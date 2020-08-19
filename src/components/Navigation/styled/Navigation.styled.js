@@ -37,6 +37,12 @@ export const NavigationItems = styled.nav`
     a, i {
         text-decoration: none;
         color: #FFFFFF;
+        cursor: pointer;
+    }
+
+    i {
+        height: 3.5rem;
+        line-height: 3.5rem;
     }
 
     a:hover, a:active, a.active, i:hover, i:active i.active {
@@ -54,4 +60,47 @@ export const NavigationList = styled.ul`
 
 export const NavigationListItem = styled.li`
     margin: 0 1rem;
+
+    .dropdown {
+        overflow: hidden;
+    }
+    
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 2rem;
+        background-color: #5C6BC0;
+        min-width: 5rem;
+        box-shadow: 0px 8px 16px 0px rqba(0,0,0,0.2);
+        z-index: 1;
+
+        a:hover, a:active, a.active, button:hover, button:active button.active {
+        color: yellow;
+    } 
+    }
+
+    .dropdown-content a {
+        float: none;
+        color: #FFFFFF;
+        padding: 0.8rem 1rem;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .dropdown-content button {
+        border: none;
+        outline: none;
+        color: #FFFFFF;
+        padding: 0.8rem 1rem;
+        background-color: inherit;
+        font-size: inherit;
+        text-align: center;
+        margin: 0;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
 `;

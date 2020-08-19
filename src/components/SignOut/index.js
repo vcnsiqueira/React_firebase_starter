@@ -5,8 +5,6 @@ import { compose } from 'recompose';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
-import Button from '../Button/Button';
-
 const SignOutBase = (props) => {
 
     const signOut = () => {
@@ -22,9 +20,9 @@ const SignOutBase = (props) => {
     }
 
     return(
-        <Button type="button" color="#e53935" variant="solid" onClick={signOut}>
+        <a type="button" onClick={signOut}>
             Sair
-        </Button>
+        </a>
     );
 };
 

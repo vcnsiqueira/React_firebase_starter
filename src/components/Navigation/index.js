@@ -35,16 +35,16 @@ const NavigationAuth = () => {
                         <Link to={ROUTES.HOME}>Home</Link>
                     </NavigationListItem>
                     <NavigationListItem>
-                        <Link to={ROUTES.ACCOUNT}>Account</Link>
-                    </NavigationListItem>
-                    <NavigationListItem>
                         <Link to={ROUTES.ADMIN}>Admin</Link>
                     </NavigationListItem>
                     <NavigationListItem>
-                        <i className="fas fa-user-circle fa-2x"/>
-                    </NavigationListItem>
-                    <NavigationListItem>
-                        <SignOut/>
+                        <div className="dropdown">
+                            <i className="fas fa-user-circle fa-2x dropdown-title"/>
+                            <div class="dropdown-content">
+                                <Link to={ROUTES.ACCOUNT}>Perfil</Link>
+                                <SignOut/>
+                            </div>
+                        </div>
                     </NavigationListItem>
                 </NavigationList>
             </NavigationItems>
