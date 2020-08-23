@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StyledLabel } from './styled/Label.styled';
 
-const Label = ({ children }) => {
+const Label = ({ children, display='block' }) => {
     return(
-        <StyledLabel>
+        <StyledLabel display={display}>
             {children}
         </StyledLabel>
     );
@@ -12,6 +12,8 @@ const Label = ({ children }) => {
 
 Label.propTypes = {
     children: PropTypes.node.isRequired,
+    display: PropTypes.string,
+    width: PropTypes.string,
 };
 
 export default Label;

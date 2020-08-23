@@ -4,8 +4,7 @@ import { withFirebase } from '../Firebase';
 
 import PasswordForgetImage from '../../assets/images/password_forget_image.jpg';
 
-import { PasswordForgetFormContainer, PasswordForgetFormWrapper, PasswordForgetFormImage, PasswordForgetFormButton } from './styled/PasswordForgetForm.styled';
-import SignUpLink from '../SignUp/SignUpLink';
+import { PasswordForgetFormContainer, PasswordForgetFormWrapper, PasswordForgetFormImage } from './styled/PasswordForgetForm.styled';
 
 import validatePasswordForget from './PasswordForgetFormValidationRules';
 import ButtonAuth from '../Button/ButtonAuth';

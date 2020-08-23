@@ -7,7 +7,7 @@ import * as ROUTES from '../../constants/routes';
 
 import SignInImage from '../../assets/images/signin_image.jpg';
 
-import { SignInFormContainer, SignInFormWrapper, SignInFormImage, SignInFormButton } from './styled/SignInForm.styled';
+import { SignInFormContainer, SignInFormWrapper, SignInFormImage } from './styled/SignInForm.styled';
 import SignUpLink from '../SignUp/SignUpLink';
 import PasswordForgetLink from '../PasswordForget/PasswordForgetLink';
 

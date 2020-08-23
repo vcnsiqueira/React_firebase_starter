@@ -16,6 +16,9 @@ export const NavigationBar = styled.header`
 `;
 
 export const NavigationBrand = styled.div`    
+    flex: 1;
+    justify-content: flex-start;
+    
     h1 {
         margin: 0;
         font-size: 1.5rem;
@@ -24,6 +27,10 @@ export const NavigationBrand = styled.div`
 `;
 
 export const NavigationLogo = styled.div`
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    
     h1 {
         margin: 0;
         font-size: 1.5rem;
@@ -33,6 +40,9 @@ export const NavigationLogo = styled.div`
 
 export const NavigationItems = styled.nav`
     margin-right: 1.5rem;
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
 
     a, i {
         text-decoration: none;
@@ -41,7 +51,6 @@ export const NavigationItems = styled.nav`
     }
 
     i {
-        height: 3.5rem;
         line-height: 3.5rem;
     }
 
@@ -70,16 +79,21 @@ export const NavigationListItem = styled.li`
         position: absolute;
         right: 2rem;
         background-color: #5C6BC0;
-        min-width: 5rem;
+        min-width: 7rem;
         box-shadow: 0px 8px 16px 0px rqba(0,0,0,0.2);
         z-index: 1;
 
-        a:hover, a:active, a.active, button:hover, button:active button.active {
+        i {
+            line-height: 0.5rem;
+            margin-right: 0.5rem;
+        }
+
+        a:hover, a:active, a.active, button:hover, button:active button.active, i:hover, i:active i.active, span:hover, span:active, span.active {
         color: yellow;
     } 
     }
 
-    .dropdown-content a {
+    .dropdown-content a, span {
         float: none;
         color: #FFFFFF;
         padding: 0.8rem 1rem;

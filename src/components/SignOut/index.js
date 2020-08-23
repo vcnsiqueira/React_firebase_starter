@@ -20,9 +20,9 @@ const SignOutBase = (props) => {
     }
 
     return(
-        <a type="button" onClick={signOut}>
-            Sair
-        </a>
+        <span href="#" type="button" onClick={signOut}>
+            <i className="fas fa-sign-out-alt"/>Sair
+        </span>
     );
 };
 

@@ -40,7 +40,6 @@ const SignUpFormBase = (props) => {
                         name: username,
                         email: email,
                     });
-                console.log(props.firebase.auth.onAuthStateChanged);
             })
             .then(() => {
                 alert("Usuário cadastrado com sucesso!");

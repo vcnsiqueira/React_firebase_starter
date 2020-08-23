@@ -3,16 +3,15 @@ import styled from 'styled-components';
 const color = '#3F51B5';
 
 export const StyledInput = styled.input`
-    display: block;
     padding: 0.5em;
-    margin: 20px 0 0;
+    margin: 0;
     color: #495057;
     border: 1px solid ${(props) => props.className === 'alert' ? '#FF0000' : '#CCCCCC'};
     border-radius: 3px;
     font-size: 1rem;
     font-weight: 400;
-    background-color: #FFF;
-    width: 100%;
+    background-color: ${props => props.isDisabledInput ? '#F5F5F5' : '#FFFFFF'};
+    width: '100%';
     ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
         color: #AAAAAA;
         opacity: 1; /* Firefox */
