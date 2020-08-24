@@ -9,7 +9,7 @@ export const StyledButton = styled.button`
     color: ${(props) => props.variant !== 'outlined' ? '#FFFFFF' : props.color ? props.color : defaultColor};
     border-radius: 3px;
     padding: 0.6rem 1rem;
-    margin: 0;
+    margin: 0.5rem;
     font-weight: bold;
     &:hover {
         background-color: ${hoverColor};
@@ -33,6 +33,19 @@ export const StyledAuthButton = styled.button`
         color: #FFFFFF;
     } 
     &:focus {
+        outline: none;
+    }
+`;
+
+export const StyledCloseXButton = styled.button`
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #FFFFFF;
+    border: transparent;
+    background-color: inherit;
+    font-weight: bold;
+    &:focus{
         outline: none;
     }
 `;

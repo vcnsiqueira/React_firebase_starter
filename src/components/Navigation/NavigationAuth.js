@@ -5,7 +5,7 @@ import { NavigationBar, NavigationBrand, NavigationLogo, NavigationItems, Naviga
 import * as ROUTES from '../../constants/routes';
 
 import SignOut from '../SignOut';
-import ModalProfile from '../Modal/ModalProfile';
+import ProfileModal from '../Modal/ProfileModal';
 
 const NavigationAuth = () => {
 
@@ -42,7 +42,7 @@ const NavigationAuth = () => {
                                 <i className="fas fa-user-circle fa-2x dropdown-title"/>
                                 <div className="dropdown-content">
                                     <div onClick={openProfile}>
-                                        <Link to={ROUTES.ACCOUNT}><i className="fas fa-id-badge"/>Perfil</Link>
+                                        <a href="#"><i className="fas fa-id-badge"/>Perfil</a>
                                     </div>
                                     <div>
                                         <SignOut/>
@@ -54,7 +54,7 @@ const NavigationAuth = () => {
                 </NavigationItems>
             </NavigationBar>
             { showProfile ? 
-                <ModalProfile show={showProfile} closeProfile={closeProfile}>Perfil</ModalProfile> 
+                <ProfileModal show={showProfile} closeProfile={closeProfile}>Perfil</ProfileModal> 
                 : null 
             }
         </Fragment>

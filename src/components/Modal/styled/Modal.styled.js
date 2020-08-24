@@ -27,6 +27,8 @@ export const ModalWrapper = styled.div`
 
 export const ModalHeader = styled.div`
     background: ${backgroundColor};
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     height: 40px;
     line-height: 40px;
     padding: 5px 20px;
@@ -72,21 +74,29 @@ export const ModalFormFieldRow = styled.li`
     div .flex4 {
         flex: 4;
     }
-    /*label {
-        flex: 2;
-    }
 
-    input {
-        flex: 3;
+    label {
+        margin-right: 10px;
     }
-
-    span {
-        flex: 1
-    }*/
 `;
 
 export const ModalFooter = styled.div`
     height: 35px;
-    padding: 15px;
+    padding-bottom: 15px;
     text-align: center;
+`;
+
+export const ModalUserImage = styled.div`
+    width: 150px;
+    height: 150px;
+    position: relative;
+    margin: auto;
+    border-radius: 75px;
+    background-color: #CCCCCC;
+    
+    i {
+        position: absolute;
+        bottom: 5px;
+        left: 68px;
+    }
 `;
