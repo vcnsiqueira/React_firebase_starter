@@ -12,7 +12,6 @@ const NavigationAuth = () => {
     const [showProfile, setShowProfile] = useState(false);
 
     const openProfile = event => {
-        console.log('ué')
         setShowProfile(true);
     }
 

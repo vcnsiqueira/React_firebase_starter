@@ -3,14 +3,42 @@ import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, ModalWrapper, ModalHeader, ModalBody, ModalUserImage, ModalFooter } from './styled/Modal.styled';
 
+import { AuthUserContext } from '../Session';
+import { withFirebase } from '../Firebase';
+
 import Button from '../Button/Button';
 import ButtonCloseX from '../Button/ButtonCloseX';
 import ChangeNameModal from './ChangeNameModal';
 import ChangePasswordModal from './ChangePasswordModal';
 
-const ProfileModal = ({ closeProfile, children }) => {
+const ProfileModal = ({ closeProfile, children, firebase }) => {
 
-    const name = 'Vinícius Siqueira';
+    /*const dados = firebase.db.collection('users').doc(firebase.auth().currentUser.uid).get()
+        .then(doc => {
+            if(doc.exists) {
+                console.log(doc.data());
+            } else {
+                console.log('não encontrou!');
+            }
+        }).catch(error => {
+            console.log(error);
+        })*/
+    
+    let name = '';
+    
+    const user = firebase.auth.currentUser.uid;
+    const dados = firebase.db.collection('users').doc(user);
+    dados.get().then(doc => {
+        if(doc.exists) {
+            name  = doc.data().name;
+            console.log(name);
+        }else {
+            console.log('Erro')
+        }
+    }).catch(error => {
+        console.log(error);
+    });
+    
     const email = 'vcnsiqueira@gmail.com';
     const [showChangeName, setShowChangeName] = useState(false);
     const [showChangePassword, setShowChangePassword] = useState(false);
@@ -74,4 +102,4 @@ ProfileModal.propTypes = {
 };
 
 
-export default ProfileModal;
+export default withFirebase(ProfileModal);
