@@ -1,9 +1,8 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 //import './Modal.css';
 import PropTypes from 'prop-types';
 import { Modal, ModalWrapper, ModalHeader, ModalBody, ModalUserImage, ModalFooter } from './styled/Modal.styled';
 
-import { AuthUserContext } from '../Session';
 import { withFirebase } from '../Firebase';
 
 import Button from '../Button/Button';
@@ -24,21 +23,40 @@ const ProfileModal = ({ closeProfile, children, firebase }) => {
             console.log(error);
         })*/
     
-    let name = '';
-    
-    const user = firebase.auth.currentUser.uid;
+    /*const user = firebase.auth.currentUser.uid;
     const dados = firebase.db.collection('users').doc(user);
     dados.get().then(doc => {
         if(doc.exists) {
-            name  = doc.data().name;
-            console.log(name);
+            const username  = doc.data().name;
+            console.log(username);
         }else {
             console.log('Erro')
         }
     }).catch(error => {
         console.log(error);
-    });
-    
+    });*/
+
+    const getName = () => {
+        firebase.db.collection('users')
+            .doc(firebase.auth.currentUser.uid)
+            .get().then(doc => {
+                if(doc.exists) {
+                    const newName = doc.data().name
+                    setName(newName);
+                    console.log(newName);
+                }else {
+                    console.log('Erro')
+                }
+            }).catch(error => {
+                console.log(error);
+            });
+    };
+
+    useEffect(() => {
+        getName();
+    }, []);
+
+    const [name, setName] = useState('');    
     const email = 'vcnsiqueira@gmail.com';
     const [showChangeName, setShowChangeName] = useState(false);
     const [showChangePassword, setShowChangePassword] = useState(false);
@@ -74,7 +92,9 @@ const ProfileModal = ({ closeProfile, children, firebase }) => {
                         <ButtonCloseX onClick={closeProfile}><i className="fas fa-times"/></ButtonCloseX>
                     </ModalHeader>
                     <ModalBody>
-                        <h2 style={{textAlign: 'center'}}>Olá {name}!</h2>
+                        { name !== '' &&
+                            <h2 style={{textAlign: 'center'}}>Olá {name}!</h2>
+                        }
                         <ModalUserImage><i className="fas fa-camera"/></ModalUserImage>
                         <p style={{fontSize:'14px', textAlign:'center'}}>{email}</p>
                     </ModalBody>
