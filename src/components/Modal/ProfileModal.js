@@ -12,30 +12,6 @@ import ChangePasswordModal from './ChangePasswordModal';
 
 const ProfileModal = ({ closeProfile, children, firebase }) => {
 
-    /*const dados = firebase.db.collection('users').doc(firebase.auth().currentUser.uid).get()
-        .then(doc => {
-            if(doc.exists) {
-                console.log(doc.data());
-            } else {
-                console.log('não encontrou!');
-            }
-        }).catch(error => {
-            console.log(error);
-        })*/
-    
-    /*const user = firebase.auth.currentUser.uid;
-    const dados = firebase.db.collection('users').doc(user);
-    dados.get().then(doc => {
-        if(doc.exists) {
-            const username  = doc.data().name;
-            console.log(username);
-        }else {
-            console.log('Erro')
-        }
-    }).catch(error => {
-        console.log(error);
-    });*/
-
     const getName = () => {
         firebase.db.collection('users')
             .doc(firebase.auth.currentUser.uid)
@@ -105,7 +81,7 @@ const ProfileModal = ({ closeProfile, children, firebase }) => {
             </Modal>
             { 
                 !showChangeName ? null :
-                    <ChangeNameModal closeChangeNameModal={closeChangeNameModal}>Trocar o Nome</ChangeNameModal>
+                    <ChangeNameModal actualName={name} closeChangeNameModal={closeChangeNameModal} closeProfile={closeProfile}>Trocar o Nome</ChangeNameModal>
             }
             {
                 !showChangePassword ? null :

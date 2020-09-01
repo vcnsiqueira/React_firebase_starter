@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { withFirebase } from '../Firebase';
 
 import { Modal, ModalWrapper, ModalHeader, ModalBody, ModalFormFieldList, ModalFormFieldRow, ModalFooter } from './styled/Modal.styled';
 
@@ -8,14 +9,33 @@ import ButtonCloseX from '../Button/ButtonCloseX';
 import Label from '../Label/Label';
 import Input from '../Input/Input';
 
-const ChangeNameModal = ({ children, closeChangeNameModal }) => {
+const ChangeNameModal = ({ actualName, children, closeChangeNameModal, closeProfile,  firebase }) => {
 
-    const [fullName, setFullName] = useState('Vinícius Siqueira');
+    const [fullName, setFullName] = useState(actualName);
   
     const handleBackground = event => { // Função para fechar o modal ao clicar fora
         if (!event.target.closest('.modal-wrapper')) {
             closeChangeNameModal();
         };
+    };
+
+    const changeName = () => {
+        firebase.db.collection('users')
+            .doc(firebase.auth.currentUser.uid)
+            .set({
+                name: fullName,
+            },
+            { merge: true },
+            )
+            .then(() => {
+                alert('Nome do usuário trocado com sucesso!')
+            })
+            .catch(error => {
+                console.error(error.message);
+                alert('Houve algum problema na execução da sua requisição')
+            });
+        closeChangeNameModal();
+        closeProfile();
     };
 
     return(
@@ -43,7 +63,7 @@ const ChangeNameModal = ({ children, closeChangeNameModal }) => {
                     </ModalFormFieldList>
                 </ModalBody>
                 <ModalFooter>
-                    <Button>Alterar Nome</Button>
+                    <Button onClick={changeName}>Alterar Nome</Button>
                 </ModalFooter>
             </ModalWrapper>
         </Modal>
@@ -52,8 +72,10 @@ const ChangeNameModal = ({ children, closeChangeNameModal }) => {
 };
 
 ChangeNameModal.propTypes = {
+    actualName: PropTypes.string,
     children: PropTypes.node.isRequired,
     closeChangeNameModal: PropTypes.func,
+    closeProfile: PropTypes.func,
 };
 
-export default ChangeNameModal;
+export default withFirebase(ChangeNameModal);

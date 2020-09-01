@@ -43,7 +43,7 @@ DialogModal.propTypes = {
     children: PropTypes.node.isRequired,
     type: PropTypes.string,
     confirmFunction: PropTypes.func,
-    cancelFunction: PropTypes.func,
+    closeDialog: PropTypes.func,
 };
 
 export default DialogModal;
