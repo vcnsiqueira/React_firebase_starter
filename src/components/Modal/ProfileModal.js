@@ -41,9 +41,8 @@ const ProfileModal = ({ closeProfile, children, firebase }) => {
             .doc(firebase.auth.currentUser.uid)
             .get().then(doc => {
                 if(doc.exists) {
-                    const newName = doc.data().name
-                    setName(newName);
-                    console.log(newName);
+                    setName(doc.data().name);
+                    setEmail(doc.data().email);
                 }else {
                     console.log('Erro')
                 }
@@ -57,7 +56,7 @@ const ProfileModal = ({ closeProfile, children, firebase }) => {
     }, []);
 
     const [name, setName] = useState('');    
-    const email = 'vcnsiqueira@gmail.com';
+    const [email, setEmail] = useState('');
     const [showChangeName, setShowChangeName] = useState(false);
     const [showChangePassword, setShowChangePassword] = useState(false);
 
