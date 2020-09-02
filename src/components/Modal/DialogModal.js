@@ -16,12 +16,13 @@ const DialogModal = ({ type, children, confirmFunction, closeDialog }) => {
         <Modal onClick={handleBackground}>
             <ModalWrapper className="modal-wrapper">
                 <ModalBody style={{textAlign: "center"}}>
-                    { type === 'success' ?
+                    {type === 'success' ?
                         <div style={{margin: "20px auto 20px"}}><i style={{color: "green"}} className="fas fa-check-circle fa-8x"/></div> :
-                        
                       type === 'failure' ?
                         <div style={{margin: "20px auto 20px"}}><i style={{color: "red"}} className="fas fa-times-circle fa-8x"/></div> :
-                        <div style={{margin: "20px auto 20px"}}><i style={{color: "yellow"}} className="fas fa-exclamation-circle fa-8x"/></div>
+                      type === 'alert' ?
+                        <div style={{margin: "20px auto 20px"}}><i style={{color: "yellow"}} className="fas fa-exclamation-circle fa-8x"/></div> :
+                        null
                     }
                     {children}
                 </ModalBody>
