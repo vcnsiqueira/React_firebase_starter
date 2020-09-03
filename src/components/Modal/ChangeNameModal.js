@@ -9,6 +9,7 @@ import ButtonCloseX from '../Button/ButtonCloseX';
 import Label from '../Label/Label';
 import Input from '../Input/Input';
 import DialogModal from './DialogModal';
+import Loader from '../Loader';
 
 const ChangeNameModal = ({ actualName, children, closeChangeNameModal, closeProfile,  firebase }) => {
 
@@ -16,6 +17,7 @@ const ChangeNameModal = ({ actualName, children, closeChangeNameModal, closeProf
     const [message, setMessage] = useState('');
     const [resultChanging, setResultChanging] = useState('');
     const [showDialog, setShowDialog] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
   
     const handleBackground = event => { // Função para fechar o modal ao clicar fora
         if (!event.target.closest('.modal-wrapper')) {
@@ -30,6 +32,7 @@ const ChangeNameModal = ({ actualName, children, closeChangeNameModal, closeProf
     };
 
     const changeName = () => {
+        setIsLoading(true);
         firebase.db.collection('users')
             .doc(firebase.auth.currentUser.uid)
             .set({
@@ -40,13 +43,16 @@ const ChangeNameModal = ({ actualName, children, closeChangeNameModal, closeProf
             .then(() => {
                 setResultChanging('success');
                 setMessage('Nome do usuário trocado com sucesso!');
+                setShowDialog(true);
+                setIsLoading(false);
             })
             .catch(error => {
                 console.error(error.message);
                 setResultChanging('failure');
                 setMessage('Houve algum problema na execução da sua requisição');
+                setShowDialog(true);
+                setIsLoading(false);
             });
-        setShowDialog(true);
     };
 
     return(
@@ -79,7 +85,9 @@ const ChangeNameModal = ({ actualName, children, closeChangeNameModal, closeProf
                     </ModalFooter>
                 </ModalWrapper>
             </Modal>
-            { showDialog && (
+            { isLoading ?
+                <Loader /> :
+                showDialog && (
                 <DialogModal type={resultChanging} closeDialog={closeDialog}>{message}</DialogModal>
             )}
         </Fragment>
