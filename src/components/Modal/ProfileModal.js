@@ -40,11 +40,11 @@ const ProfileModal = ({ closeProfile, children, firebase }) => {
         getName();
     }, []);
 
-    const handleBackground = event => { // Função para fechar o modal ao clicar fora
+    /*const handleBackground = event => { // Função para fechar o modal ao clicar fora
         if (!event.target.closest('.modal-wrapper')) {
             closeProfile();
         };
-    };
+    };*/
 
     const openChangeNameModal = event => {
         setShowChangeName(true);
@@ -67,7 +67,7 @@ const ProfileModal = ({ closeProfile, children, firebase }) => {
     } else {
         return(
             <Fragment>
-                <Modal onClick={handleBackground}>
+                <Modal>
                     <ModalWrapper className="modal-wrapper">
                         <ModalHeader>
                             <h3>{children}</h3>
@@ -81,18 +81,18 @@ const ProfileModal = ({ closeProfile, children, firebase }) => {
                             <p style={{fontSize:'14px', textAlign:'center'}}>{email}</p>
                         </ModalBody>
                         <ModalFooter>
-                            <Button onClick={openChangeNameModal}>Trocar o nome</Button>
-                            <Button onClick={openChangePasswordModal}>Trocar a senha</Button>
+                            <Button onClick={openChangeNameModal}>Alterar o nome</Button>
+                            <Button onClick={openChangePasswordModal}>Alterar a senha</Button>
                         </ModalFooter>
                     </ModalWrapper>
                 </Modal>
                 { 
                     !showChangeName ? null :
-                        <ChangeNameModal actualName={name} closeChangeNameModal={closeChangeNameModal} closeProfile={closeProfile}>Trocar o Nome</ChangeNameModal>
+                        <ChangeNameModal actualName={name} closeChangeNameModal={closeChangeNameModal} closeProfile={closeProfile}>Alterar o Nome</ChangeNameModal>
                 }
                 {
                     !showChangePassword ? null :
-                        <ChangePasswordModal closeChangePasswordModal={closeChangePasswordModal}>Trocar a Senha</ChangePasswordModal>
+                        <ChangePasswordModal closeChangePasswordModal={closeChangePasswordModal}>Alterar a Senha</ChangePasswordModal>
                 }
             </Fragment>
         );

@@ -18,31 +18,31 @@ const NavigationAuth = (props) => {
 
     const openProfile = event => {
         setShowProfile(true);
-    }
+    };
 
     const closeProfile = () => {
         setShowProfile(false);
-    }
+    };
 
     const openDialog = event => {
         setShowDialog(true);
-    }
+    };
 
     const closeDialog = event => {
         setShowDialog(false);
-    }
+    };
 
     const signOut = () => {
         props.firebase.doSignOut()
             .then(() => {
-                alert('Usuário desconectado com sucesso!');
-                props.history.push(ROUTES.LANDING)
+                //alert('Usuário desconectado com sucesso!');
+                //props.history.push(ROUTES.LANDING)
             })
             .catch(error => {
                 console.error(error.message);
-                alert('Houve algum problema ao tentar desconectar!')
-            })
-    }
+                //alert('Houve algum problema ao tentar desconectar!')
+            });
+    };
 
     return(
         <Fragment>
@@ -79,13 +79,11 @@ const NavigationAuth = (props) => {
                     </NavigationList>
                 </NavigationItems>
             </NavigationBar>
-            { showProfile ? 
-                <ProfileModal show={showProfile} closeProfile={closeProfile}>Perfil</ProfileModal> 
-                : null 
+            { showProfile && ( 
+                <ProfileModal show={showProfile} closeProfile={closeProfile}>Perfil</ProfileModal>)
             }
-            { showDialog ?
-                <DialogModal type="alert" confirmFunction={signOut} closeDialog={closeDialog}>Tem certeza que deseja sair?</DialogModal>
-                : null
+            { showDialog && (
+                <DialogModal type="alert" confirmFunction={signOut} closeDialog={closeDialog}>Tem certeza que deseja sair?</DialogModal>)
             }
         </Fragment>
     );

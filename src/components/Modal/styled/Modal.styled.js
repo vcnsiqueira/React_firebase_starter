@@ -78,6 +78,12 @@ export const ModalFormFieldRow = styled.li`
     label {
         margin-right: 10px;
     }
+    
+    p {
+        font-size: 0.7rem;
+        color: #FF0000;
+        margin: 0;
+    }
 `;
 
 export const ModalFooter = styled.div`

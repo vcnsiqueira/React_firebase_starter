@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withFirebase } from '../Firebase';
 
@@ -14,16 +14,17 @@ import Loader from '../Loader';
 const ChangeNameModal = ({ actualName, children, closeChangeNameModal, closeProfile,  firebase }) => {
 
     const [fullName, setFullName] = useState(actualName);
+    const [errors, setErrors] = useState({});
     const [message, setMessage] = useState('');
     const [resultChanging, setResultChanging] = useState('');
     const [showDialog, setShowDialog] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
   
-    const handleBackground = event => { // Função para fechar o modal ao clicar fora
+    /*const handleBackground = event => { // Função para fechar o modal ao clicar fora
         if (!event.target.closest('.modal-wrapper')) {
             closeChangeNameModal();
         };
-    };
+    };*/
 
     const closeDialog = event => {
         setShowDialog(false);
@@ -31,7 +32,7 @@ const ChangeNameModal = ({ actualName, children, closeChangeNameModal, closeProf
         closeProfile();
     };
 
-    const changeName = () => {
+    const changeNameFirebase = () => {
         setIsLoading(true);
         firebase.db.collection('users')
             .doc(firebase.auth.currentUser.uid)
@@ -55,9 +56,37 @@ const ChangeNameModal = ({ actualName, children, closeChangeNameModal, closeProf
             });
     };
 
+    const validateName = (fullName) => {
+        let errors = {};
+
+        if(!fullName) {
+            errors.name = 'É necessário inserir um nome';
+        }
+        if(fullName === actualName) {
+            errors.name = 'O nome não foi alterado'
+        }
+
+        return errors;
+    }
+
+    const changeName = () => {
+        let newErrors = validateName(fullName);
+        setErrors(newErrors);
+        if(Object.keys(newErrors).length === 0) {
+            changeNameFirebase();
+        };
+        console.log(validateName(fullName))
+    };
+
+    useEffect(() => {
+        if(Object.keys(errors).length !== 0) {
+            setErrors(validateName(fullName));
+        }
+    }, [fullName]);
+
     return(
         <Fragment>
-            <Modal onClick={handleBackground}>
+            <Modal>
                 <ModalWrapper className="modal-wrapper">
                     <ModalHeader>
                         <h3>{children}</h3>
@@ -70,18 +99,22 @@ const ChangeNameModal = ({ actualName, children, closeChangeNameModal, closeProf
                                     <Label display="inline">Nome:</Label>
                                 </div>
                                 <div className="flex3">
-                                    <Input  
+                                    <Input
+                                        className={`${errors.name && 'alert'}`}
                                         name="name" 
                                         value={fullName} 
                                         onChange={event => setFullName(event.target.value)} 
                                         placeholder="Digite o novo nome"
                                     />
+                                    { errors.name && (
+                                        <p>{errors.name}</p>
+                                    )}
                                 </div>
                             </ModalFormFieldRow>
                         </ModalFormFieldList>
                     </ModalBody>
                     <ModalFooter>
-                        <Button onClick={changeName}>Alterar Nome</Button>
+                        <Button onClick={changeName}>Alterar o nome</Button>
                     </ModalFooter>
                 </ModalWrapper>
             </Modal>

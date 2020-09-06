@@ -18,15 +18,12 @@ const NavigationNonAuth = () => {
             <NavigationItems>
                 <NavigationList>
                     <NavigationListItem>
-                        <Link to={ROUTES.SIGN_UP}>
-                            <Button type="button" color="#e53935" variant="solid">
-                                Registrar
-                            </Button>
+                        <Link to={ROUTES.SIGN_UP} style={{fontWeight: "bold"}}>Registrar
                         </Link>
                     </NavigationListItem>
                     <NavigationListItem>
                         <Link to={ROUTES.SIGN_IN}>
-                            <Button type="button" color="#e53935" variant="solid">
+                            <Button type="button" color="#4CAF50" variant="solid">
                                 Entrar
                             </Button>
                         </Link>

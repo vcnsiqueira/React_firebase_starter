@@ -14,14 +14,14 @@ const ChangePasswordModal = ({ children, closeChangePasswordModal }) => {
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
   
-    const handleBackground = event => { // Função para fechar o modal ao clicar fora
+    /*const handleBackground = event => { // Função para fechar o modal ao clicar fora
         if (!event.target.closest('.modal-wrapper')) {
             closeChangePasswordModal();
         };
-    };
+    };*/
 
     return(
-        <Modal onClick={handleBackground}>
+        <Modal>
             <ModalWrapper className="modal-wrapper">
                 <ModalHeader>
                     <h3>{children}</h3>

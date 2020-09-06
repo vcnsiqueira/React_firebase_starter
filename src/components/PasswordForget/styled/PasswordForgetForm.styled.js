@@ -53,6 +53,6 @@ export const PasswordForgetFormButton = styled.div`
 export const PasswordForgetLinkStyled = styled.div`
     font-size: 1rem;
     position: absolute;
-    bottom: 200px;
+    bottom: 40px;
     left: 40px;
 `;

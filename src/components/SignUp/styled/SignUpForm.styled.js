@@ -24,12 +24,6 @@ export const SignupFormWrapper = styled.div`
         font-weight: 300;
         font-size: 2rem;
     }
-
-    p {
-        font-size: 0.7rem;
-        color: #FF0000;
-        margin: 0;
-    }
 `;
 
 export const SignupFormImage = styled.div`
@@ -44,6 +38,16 @@ export const SignupFormImage = styled.div`
     background-size: cover;
     background-position: center;
     border-radius: 0 10px 10px 0;
+`;
+
+export const SignUpFormInput = styled.div`
+    padding-bottom: 0.5rem;
+
+    p {
+        font-size: 0.7rem;
+        color: #FF0000;
+        margin: 0;
+    }
 `;
 
 export const SignUpLinkStyled = styled.div`

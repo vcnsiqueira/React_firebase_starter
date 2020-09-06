@@ -15,7 +15,7 @@ export const BackgroundLoader = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,1);
     display: block;
 `;
 
@@ -25,7 +25,7 @@ export const StyledLoader = styled.div`
     left: 50%;
     z-index: 1;
     margin: -60px 0 0 -60px;
-    border: 16px solid #F5F5F5;
+    border: 16px solid transparent;
     border-radius: 50%;
     border-top: 16px solid #3F51B5;
     width: 120px;

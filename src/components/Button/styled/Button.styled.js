@@ -11,6 +11,8 @@ export const StyledButton = styled.button`
     padding: 0.6rem 1rem;
     margin: 0.5rem;
     font-weight: bold;
+    min-width: 80px;
+    cursor: pointer;
     &:hover {
         background-color: ${hoverColor};
         color: #FFFFFF;
@@ -26,8 +28,10 @@ export const StyledAuthButton = styled.button`
     color: ${(props) => props.variant !== 'outlined' ? '#FFFFFF' : props.color ? props.color : defaultColor};
     border-radius: 3px;
     padding: 0.6rem 1rem;
-    margin: 1.2rem 0.3rem 0 0;
+    margin: 0.5rem 0 0 0;
     font-weight: bold;
+    min-width: 80px;
+    cursor: pointer;
     &:hover {
         background-color: ${hoverColor};
         color: #FFFFFF;
@@ -45,6 +49,7 @@ export const StyledCloseXButton = styled.button`
     border: transparent;
     background-color: inherit;
     font-weight: bold;
+    cursor: pointer;
     &:focus{
         outline: none;
     }
