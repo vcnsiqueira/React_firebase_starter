@@ -32,20 +32,23 @@ class Firebase {
 
     doSignOut = () => // Sign out method
         this.auth.signOut()
-            /*.then(res => {
-                console.log(res);
-            })
-            .catch(err => {
-                console.error(err);
-            })*/
 
-    doPasswordReset = email =>
+    doPasswordReset = email => // Reset password
         this.auth.sendPasswordResetEmail(email);
 
-    doPasswordUpdate = password => 
-        this.auth.currentUsers.updatePassword(password);
+    /*oPasswordUpdate = (oldPassword, password) => {
+        const cred = this.auth.EmailAuthProvider.credential(this.auth.currentUser, oldPassword);
+        this.auth.currentUser.reauthenticateWithCredential(cred)
+            .then(() => {
+                return this.auth.currentUser.updatePassword(password);
+            })
+            .catch(error => {
+                console.error(error);
+            })
+    }*/
 
-    // *** User API's ***
+    doPasswordUpdate = password => // Change password
+        this.auth.currentUser.updatePassword(password);
     
 
 }

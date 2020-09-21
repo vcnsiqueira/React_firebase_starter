@@ -92,7 +92,7 @@ const ProfileModal = ({ closeProfile, children, firebase }) => {
                 }
                 {
                     !showChangePassword ? null :
-                        <ChangePasswordModal closeChangePasswordModal={closeChangePasswordModal}>Alterar a Senha</ChangePasswordModal>
+                        <ChangePasswordModal closeChangePasswordModal={closeChangePasswordModal} closeProfile={closeProfile}>Alterar a Senha</ChangePasswordModal>
                 }
             </Fragment>
         );
