@@ -24,7 +24,7 @@ const ChangePasswordModal = ({ children, closeChangePasswordModal, closeProfile,
   
     const changePasswordFirebase = event => {
         setIsLoading(true);
-        firebase.doPasswordUpdate(currentPassword, newPassword)
+        firebase.doPasswordUpdate(newPassword)
             .then(() => {
                 setResultChanging('success');
                 setMessage('Senha alterada com sucesso');
@@ -38,6 +38,7 @@ const ChangePasswordModal = ({ children, closeChangePasswordModal, closeProfile,
                 setShowDialog(true);
                 setIsLoading(false);
             });
+        setIsLoading(false);
     };
 
     const closeDialog = event => {

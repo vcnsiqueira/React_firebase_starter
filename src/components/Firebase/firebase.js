@@ -36,8 +36,14 @@ class Firebase {
     doPasswordReset = email => // Reset password
         this.auth.sendPasswordResetEmail(email);
 
-    /*oPasswordUpdate = (oldPassword, password) => {
-        const cred = this.auth.EmailAuthProvider.credential(this.auth.currentUser, oldPassword);
+    /*doPasswordUpdate = (oldPassword, password) => {
+        const user = this.auth.currentUser;
+        const cred = app.auth().EmailAuthProvider.credential(user.email, oldPassword);
+        console.log(oldPassword);
+        console.log(password);
+        console.log(cred);
+        console.log(this.auth.currentUser.email);
+        
         this.auth.currentUser.reauthenticateWithCredential(cred)
             .then(() => {
                 return this.auth.currentUser.updatePassword(password);
