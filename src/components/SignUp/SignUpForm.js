@@ -57,7 +57,7 @@ const SignUpFormBase = (props) => {
                 setEmail('');
                 setPasswordOne('');
                 setPasswordTwo('');
-                //props.history.push(ROUTES.SIGN_IN);
+                props.history.push(ROUTES.SIGN_IN);
             })
             .catch(error => {
                 console.error(error.message);

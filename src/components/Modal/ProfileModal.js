@@ -1,6 +1,8 @@
 import React, { Fragment, useState, useEffect } from 'react';
-//import './Modal.css';
 import PropTypes from 'prop-types';
+
+import { withAuthorization } from '../Session';
+import { compose } from 'recompose';
 import { Modal, ModalWrapper, ModalHeader, ModalBody, ModalUserImage, ModalFooter } from './styled/Modal.styled';
 
 import { withFirebase } from '../Firebase';
@@ -18,7 +20,7 @@ const ProfileModal = ({ closeProfile, children, firebase }) => {
     const [email, setEmail] = useState('');
     const [showChangeName, setShowChangeName] = useState(false);
     const [showChangePassword, setShowChangePassword] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     
     const getName = () => {
         firebase.db.collection('users')
@@ -27,7 +29,7 @@ const ProfileModal = ({ closeProfile, children, firebase }) => {
                 if(doc.exists) {
                     setName(doc.data().name);
                     setEmail(doc.data().email);
-                    setIsLoading(true);
+                    setIsLoading(false);
                 }else {
                     console.log('Erro')
                 }
@@ -39,12 +41,6 @@ const ProfileModal = ({ closeProfile, children, firebase }) => {
     useEffect(() => {
         getName();
     }, []);
-
-    /*const handleBackground = event => { // Função para fechar o modal ao clicar fora
-        if (!event.target.closest('.modal-wrapper')) {
-            closeProfile();
-        };
-    };*/
 
     const openChangeNameModal = event => {
         setShowChangeName(true);
@@ -62,7 +58,7 @@ const ProfileModal = ({ closeProfile, children, firebase }) => {
         setShowChangePassword(false);
     }
 
-    if(!isLoading) {
+    if(isLoading) {
         return <Loader />;
     } else {
         return(
@@ -99,10 +95,15 @@ const ProfileModal = ({ closeProfile, children, firebase }) => {
     }
 }
 
+const condition = authUser => !!authUser;
+
 ProfileModal.propTypes = {
     children: PropTypes.node.isRequired,
     closeProfile: PropTypes.func,
 };
 
 
-export default withFirebase(ProfileModal);
+export default compose(
+    withAuthorization(condition), 
+    withFirebase,
+)(ProfileModal);
