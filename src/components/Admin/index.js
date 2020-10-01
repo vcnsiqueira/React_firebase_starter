@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { withFirebase } from '../Firebase';
 
 import Loader from '../Loader';
+import UserListTable from '../UserListTable';
 
 const Admin = ({ firebase }) => {
     
@@ -34,7 +35,7 @@ const Admin = ({ firebase }) => {
         return(
             <div>
                 <h1>Admin Page</h1>
-                <UserList users={users}/>
+                <UserListTable users={users}/>
             </div>
         );
     }
