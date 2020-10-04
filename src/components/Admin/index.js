@@ -41,24 +41,4 @@ const Admin = ({ firebase }) => {
     }
 };
 
-const UserList = ({ users }) => {
-    return(
-        <ul>
-            {users.map(user => (
-                <li key={user.id}>
-                    <span>
-                        <strong>Id:</strong> {user.id}
-                    </span>
-                    <span>
-                        <strong>E-mail:</strong> {user.email}
-                    </span>
-                    <span>
-                        <strong>Name:</strong> {user.name}
-                    </span>
-                </li>
-            ))}
-        </ul>
-    );
-}
-
 export default withFirebase(Admin);

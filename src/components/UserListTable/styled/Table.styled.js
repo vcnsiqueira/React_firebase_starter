@@ -35,7 +35,6 @@ export const TableHeaderCell = styled.th`
 
 export const TableCell = styled.td`
     text-align: center;
-    padding: 1rem;
     font-family: Arial, Helvetica, sans-serif;
     color: #000000;
     font-size: 0.8rem;

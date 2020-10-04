@@ -5,7 +5,7 @@ const hoverColor = '#002984';
 
 export const StyledButton = styled.button`
     background-color: ${(props) => props.variant !== 'outlined'  ? props.color ? props.color : defaultColor : '#FFFFFF'};
-    border: 1px solid ${defaultColor};
+    border: 1px solid ${(props) => props.variant !== 'outlined'  ? props.color ? props.color : defaultColor : '#FFFFFF'};
     color: ${(props) => props.variant !== 'outlined' ? '#FFFFFF' : props.color ? props.color : defaultColor};
     border-radius: 3px;
     padding: 0.6rem 1rem;
@@ -23,19 +23,21 @@ export const StyledButton = styled.button`
     }
 `;
 
-export const StyledAddButton = styled.button`
+export const StyledIconButton = styled.button`
     background-color: ${(props) => props.variant !== 'outlined' ? props.color ? props.color : defaultColor : '#FFFFFF'};
-    border: 2px solid ${defaultColor};
+    border: 2px solid ${(props) => props.variant !== 'outlined' ? props.color ? props.color : defaultColor : props.color ? props.color : defaultColor};
     color: ${(props) => props.variant !== 'outlined' ? '#FFFFFF' : props.color ? props.color : defaultColor};
     border-radius: 3px;
     padding: 0.6rem 0.6rem;
     margin: 0.5rem;
+    width: 35px;
+    height: 35px;
     font-weight: bold;
     cursor: pointer;
     &:hover {
-        background-color: ${(props) => props.variant !== 'outlined' ? props.hoverColor ? props.hoverColor : hoverColor : 'FFFFFF'};
-        color: ${(props) => props.variant !== 'outlined' ? '#FFFFFF' : props.color ? props.color : defaultColor};
-        border: 1px solid ${(props) => props.variant !== 'outlined' ? props.hoverColor ? props.hoverColor : hoverColor : 'FFFFFF'};
+        background-color: ${(props) => props.variant !== 'outlined' ? props.hoverColor ? props.hoverColor : hoverColor : props.color ? props.color : defaultColor};
+        color: #FFFFFF;
+        border: 1px solid ${(props) => props.variant !== 'outlined' ? props.hoverColor ? props.hoverColor : hoverColor : props.color ? props.color : defaultColor};
     } 
     &:focus {
         outline: none;
