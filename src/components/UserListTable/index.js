@@ -8,7 +8,7 @@ import Badge from '../Badge';
 
 const UserListTable = ({ users }) => {
 
-    const header = ['Nome', 'E-mail', 'Último Login', 'Busca', 'Opções'];
+    const header = ['Nome', 'E-mail', 'Data de acesso', 'Último Login', 'Busca', 'Opções'];
     const [searchTerm, setSearchTerm] = useState('');
     const [data, setData] = useState(users);
 
@@ -51,13 +51,13 @@ const UserListTable = ({ users }) => {
             </TableHeader>
             <TableBody>
                     {
-                        //users.filter(user => removeAccent(user.name).toLowerCase().includes(removeAccent(searchTerm).toLowerCase())).map((user, index) => {
                         data.map((user, index) => {
                             return (
                                 <TableRow key={user.id}>
                                     <TableCell>{user.name}</TableCell>
                                     <TableCell>{user.email}</TableCell>
-                                    <TableCell>{user.lastLogin && null}</TableCell>
+                                    <TableCell>{user.creationDate}</TableCell>
+                                    <TableCell>{user.lastLogin}</TableCell>
                                     <TableCell><Badge type='success'>Ativo</Badge></TableCell>
                                     <TableCell><ButtonIcon variant='outlined'><icon className='fas fa-ellipsis-v'/></ButtonIcon></TableCell>
                                 </TableRow>

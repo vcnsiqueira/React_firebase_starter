@@ -36,6 +36,14 @@ const SignInFormBase = (props) => {
     const onSubmit = event => {
         setIsLoading(true);
         props.firebase.doSignInWithEmailAndPassword(email, password)
+            .then(authUser => {
+                return props.firebase.db
+                    .collection('users')
+                    .doc(authUser.user.uid)
+                    .set({
+                        lastLogin: props.firebase.auth.currentUser.metadata.lastSignInTime,
+                    }, { merge: true });
+            })
             .then(() => {
                 //alert('Colocar um loader!');
                 setEmail('');

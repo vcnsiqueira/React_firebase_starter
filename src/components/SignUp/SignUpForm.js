@@ -46,9 +46,10 @@ const SignUpFormBase = (props) => {
                     .set({
                         name: username,
                         email: email,
-                    });
+                    }, { merge: true });
             })
             .then(() => {
+                console.log('Deu certo o registro')
                 setDialogTypeMessage('success');
                 setDialogMessage('Usuário cadastrado com sucesso!');
                 setShowDialog(true);
