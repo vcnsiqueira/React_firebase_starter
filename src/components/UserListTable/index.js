@@ -8,14 +8,29 @@ import Badge from '../Badge';
 
 const UserListTable = ({ users }) => {
 
-    const header = ['Nome', 'E-mail', 'Último Login', 'Busca', 'Opções']
-    const [searchTerm, setSearchTerm] = useState('')
+    const header = ['Nome', 'E-mail', 'Último Login', 'Busca', 'Opções'];
+    const [searchTerm, setSearchTerm] = useState('');
+    const [data, setData] = useState(users);
 
     const handleSearch = event => {
         setSearchTerm(event.target.value);
+        searchData(event.target.value, users);
     };
 
     const removeAccent = word => word.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+
+    const searchData = (value, listObject) => { // search for multiple object
+        if (value === " ") {
+            setData(listObject);
+        } else {
+            const filteredData = listObject.filter(item => {
+                return Object.keys(item).some(key => 
+                    removeAccent(item[key].toString()).toLowerCase().trim().includes(removeAccent(value).toLowerCase())
+                );
+            });
+            setData(filteredData);
+        };
+    }
 
     return(
         <Table>
@@ -36,7 +51,8 @@ const UserListTable = ({ users }) => {
             </TableHeader>
             <TableBody>
                     {
-                        users.filter(user => removeAccent(user.name).toLowerCase().includes(removeAccent(searchTerm).toLowerCase())).map((user, index) => {
+                        //users.filter(user => removeAccent(user.name).toLowerCase().includes(removeAccent(searchTerm).toLowerCase())).map((user, index) => {
+                        data.map((user, index) => {
                             return (
                                 <TableRow key={user.id}>
                                     <TableCell>{user.name}</TableCell>
