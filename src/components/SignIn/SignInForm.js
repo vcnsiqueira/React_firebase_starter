@@ -16,6 +16,7 @@ import ButtonAuth from '../Button/ButtonAuth';
 import Input from '../Input/Input';
 import Loader from '../Loader';
 import DialogModal from '../Modal/DialogModal';
+import { parseFirebaseDate } from '../../helpers/dateHelper';
 
 const SignInFormBase = (props) => {
 
@@ -41,7 +42,7 @@ const SignInFormBase = (props) => {
                     .collection('users')
                     .doc(authUser.user.uid)
                     .set({
-                        lastLogin: props.firebase.auth.currentUser.metadata.lastSignInTime,
+                        lastLogin: parseFirebaseDate(props.firebase.auth.currentUser.metadata.lastSignInTime),
                     }, { merge: true });
             })
             .then(() => {

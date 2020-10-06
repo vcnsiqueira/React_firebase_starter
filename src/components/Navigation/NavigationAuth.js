@@ -10,11 +10,15 @@ import * as ROUTES from '../../constants/routes';
 
 import ProfileModal from '../Modal/ProfileModal';
 import DialogModal from '../Modal/DialogModal';
+import Loader from '../Loader';
 
 const NavigationAuth = (props) => {
 
     const [showProfile, setShowProfile] = useState(false);
     const [showDialog, setShowDialog] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [showDialogErrorLogOut, setShowDialogErrorLogOut] = useState(false);
+    const [messageErrorLogOut, setMessageErrorLogOut] = useState('');
 
     const openProfile = event => {
         setShowProfile(true);
@@ -32,15 +36,23 @@ const NavigationAuth = (props) => {
         setShowDialog(false);
     };
 
+    const closeErrorLogOutDialog = event => {
+        setShowDialogErrorLogOut(false);
+    }
+
     const signOut = () => {
+        setIsLoading(true);
         props.firebase.doSignOut()
             .then(() => {
-                //alert('Usuário desconectado com sucesso!');
-                //props.history.push(ROUTES.LANDING)
+                console.log('Usuário desconectado com sucesso!');
+                setIsLoading(false);
+                props.history.push(ROUTES.LANDING);
             })
             .catch(error => {
                 console.error(error.message);
-                //alert('Houve algum problema ao tentar desconectar!')
+                setShowDialogErrorLogOut(true);
+                setMessageErrorLogOut('Houve algum problema ao tentar desconectar!');
+                setIsLoading(false);
             });
     };
 
@@ -79,6 +91,12 @@ const NavigationAuth = (props) => {
                     </NavigationList>
                 </NavigationItems>
             </NavigationBar>
+            { isLoading ? 
+                <Loader/> :
+                showDialogErrorLogOut && (
+                    <DialogModal type="failure" closeErrorLogoutDialog={closeErrorLogOutDialog}>{messageErrorLogOut}</DialogModal>
+                )
+            }
             { showProfile && ( 
                 <ProfileModal show={showProfile} closeProfile={closeProfile}>Perfil</ProfileModal>)
             }

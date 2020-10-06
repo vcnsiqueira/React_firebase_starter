@@ -43,7 +43,7 @@ const UserListTable = ({ users }) => {
                             } else if (item === 'Busca') {
                                 return <TableHeaderCell key={index}><Search value={searchTerm} onChange={handleSearch}/></TableHeaderCell>
                             } else{
-                                return <TableHeaderCell key={index}><ButtonIcon variant="solid" color={'#FF9800'} hoverColor={'#FB8C00'} onClick={console.log('Hey!')}><icon className='fas fa-plus'/></ButtonIcon></TableHeaderCell>
+                                return <TableHeaderCell key={index}><ButtonIcon variant="solid" color={'#FF9800'} hoverColor={'#FB8C00'}><icon className='fas fa-plus'/></ButtonIcon></TableHeaderCell>
                             }
                         })
                     }

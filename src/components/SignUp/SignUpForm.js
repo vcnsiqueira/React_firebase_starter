@@ -15,6 +15,7 @@ import ButtonAuth from '../Button/ButtonAuth';
 import Input from '../Input/Input';
 import Loader from '../Loader';
 import DialogModal from '../Modal/DialogModal';
+import { parseFirebaseDate } from '../../helpers/dateHelper';
 
 const SignUpFormBase = (props) => {
 
@@ -49,7 +50,7 @@ const SignUpFormBase = (props) => {
                     }, { merge: true });
             })
             .then(() => {
-                console.log('Deu certo o registro')
+                //console.log('Deu certo o registro')
                 setDialogTypeMessage('success');
                 setDialogMessage('Usuário cadastrado com sucesso!');
                 setShowDialog(true);
@@ -58,12 +59,12 @@ const SignUpFormBase = (props) => {
                 setEmail('');
                 setPasswordOne('');
                 setPasswordTwo('');
-                props.history.push(ROUTES.SIGN_IN);
+                //props.history.push(ROUTES.SIGN_IN);
             })
             .catch(error => {
                 console.error(error.message);
                 setDialogTypeMessage('failure');
-                setDialogMessage('Este e-mail já está cadastrado. Clique em entrar');
+                setDialogMessage('Tem certeza que não está cadastrado? Se já tem cadastro, clique em entrar');
                 setShowDialog(true);
                 setIsLoading(false);
             });
@@ -71,7 +72,16 @@ const SignUpFormBase = (props) => {
 
     const closeDialog = event => {
         setShowDialog(false);
-        props.history.push(ROUTES.SIGN_IN)
+        if (dialogTypeMessage === 'success') {
+            props.history.push(ROUTES.HOME);
+            props.firebase.db
+                .collection('users')
+                .doc(props.firebase.auth.currentUser.uid)
+                .set({
+                    creationDate: parseFirebaseDate(props.firebase.auth.currentUser.metadata.lastSignInTime),
+                    lastLogin: parseFirebaseDate(props.firebase.auth.currentUser.metadata.lastSignInTime),
+                }, { merge: true });
+        }
     }
     
     const handleSubmit = event => {

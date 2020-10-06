@@ -17,7 +17,7 @@ const Admin = ({ firebase }) => {
                     ...doc.data(),
                     id: doc.id, 
                 }))
-                console.log(docs);
+                //console.log(docs);
                 setUsers(docs);
                 setIsLoading(false);
         }).catch(error => {
