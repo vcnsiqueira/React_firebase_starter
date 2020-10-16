@@ -13,6 +13,8 @@ import SignInLink from '../SignIn/SignInLink';
 import validate from './SignUpFormValidationRules';
 import ButtonAuth from '../Button/ButtonAuth';
 import Input from '../Input/Input';
+import Label from '../Label/Label';
+import Checkbox from '../Checkbox';
 import Loader from '../Loader';
 import DialogModal from '../Modal/DialogModal';
 import { parseFirebaseDate } from '../../helpers/dateHelper';
@@ -23,6 +25,7 @@ const SignUpFormBase = (props) => {
     const [email, setEmail] = useState('');
     const [passwordOne, setPasswordOne] = useState('');
     const [passwordTwo, setPasswordTwo] = useState('');
+    const [isAdmin, setIsAdmin] = useState(false);
     const [errors, setErrors] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const [showDialog, setShowDialog] = useState(false);
@@ -93,6 +96,10 @@ const SignUpFormBase = (props) => {
         }
     };
 
+    const onChangeCheckbox = event => {
+        setIsAdmin(event.target.checked);
+    }
+
     return(
         <Fragment>
             <SignupFormContainer>
@@ -150,6 +157,15 @@ const SignUpFormBase = (props) => {
                             {errors.passwordTwo && (
                                 <p>{errors.passwordTwo}</p>
                             )}
+                        </SignUpFormInput>
+                        <SignUpFormInput>
+                            <Label display='inline'>    
+                                <Checkbox
+                                    checked={isAdmin}
+                                    onChange={onChangeCheckbox}
+                                />
+                                <span>Admin</span>
+                            </Label>
                         </SignUpFormInput>
                         <ButtonAuth type="submit">Registrar</ButtonAuth>
                     </form>

@@ -15,13 +15,13 @@ const UserListTable = ({ users }) => {
 
     const handleSearch = event => {
         setSearchTerm(event.target.value);
-        searchData(event.target.value, data);
+        searchData(event.target.value, users);
     };
 
     const removeAccent = word => word.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
 
     const searchData = (value, listObject) => { // search for multiple object
-        if (value === " ") {
+        if (value === ' ' | value === '') {
             setData(listObject);
         } else {
             const filteredData = listObject.filter(item => {
