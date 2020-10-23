@@ -7,12 +7,13 @@ import { compose } from 'recompose';
 import { withFirebase } from '../Firebase';
 
 import * as ROUTES from '../../constants/routes';
+import * as ROLES from '../../constants/roles';
 
 import ProfileModal from '../Modal/ProfileModal';
 import DialogModal from '../Modal/DialogModal';
 import Loader from '../Loader';
 
-const NavigationAuth = (props) => {
+const NavigationAuth = ({ firebase, authUser, history }) => {
 
     const [showProfile, setShowProfile] = useState(false);
     const [showDialog, setShowDialog] = useState(false);
@@ -42,11 +43,11 @@ const NavigationAuth = (props) => {
 
     const signOut = () => {
         setIsLoading(true);
-        props.firebase.doSignOut()
+        firebase.doSignOut()
             .then(() => {
                 console.log('Usuário desconectado com sucesso!');
                 setIsLoading(false);
-                props.history.push(ROUTES.LANDING);
+                history.push(ROUTES.LANDING);
             })
             .catch(error => {
                 console.error(error.message);
@@ -70,9 +71,11 @@ const NavigationAuth = (props) => {
                         <NavigationListItem>
                             <Link to={ROUTES.HOME}>Home</Link>
                         </NavigationListItem>
-                        <NavigationListItem>
-                            <Link to={ROUTES.ADMIN}>Admin</Link>
-                        </NavigationListItem>
+                        {!!authUser.roles[ROLES.ADMIN] && (
+                            <NavigationListItem>
+                                <Link to={ROUTES.ADMIN}>Admin</Link>
+                            </NavigationListItem>
+                        )}
                         <NavigationListItem>
                             <div className="dropdown">
                                 <i className="fas fa-user-circle fa-2x dropdown-title"/>

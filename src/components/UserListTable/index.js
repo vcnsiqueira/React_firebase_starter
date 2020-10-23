@@ -102,7 +102,7 @@ const UserListTable = ({ users }) => {
                             } else if (item === 'Busca') {
                                 return <TableHeaderCell key={index}><Search value={searchTerm} onChange={handleSearch}/></TableHeaderCell>
                             } else {
-                                return <TableHeaderCell key={index}><ButtonIcon variant="solid" color={'#FF9800'} hoverColor={'#FB8C00'}><icon className='fas fa-plus'/></ButtonIcon></TableHeaderCell>
+                                return <TableHeaderCell key={index}><ButtonIcon variant="solid" color={'#FF9800'} hoverColor={'#FB8C00'}><i className='fas fa-plus'/></ButtonIcon></TableHeaderCell>
                             }
                         })
                     }
@@ -118,7 +118,7 @@ const UserListTable = ({ users }) => {
                                     <TableCell>{user.creationDate}</TableCell>
                                     <TableCell>{user.lastLogin}</TableCell>
                                     <TableCell><Badge type='success'>Ativo</Badge></TableCell>
-                                    <TableCell><ButtonIcon variant='outlined'><icon className='fas fa-ellipsis-v'/></ButtonIcon></TableCell>
+                                    <TableCell><ButtonIcon variant='outlined'><i className='fas fa-ellipsis-v'/></ButtonIcon></TableCell>
                                 </TableRow>
                             );
                         })

@@ -4,6 +4,7 @@ import { compose } from 'recompose';
 
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
+import * as ROLES from '../../constants/roles';
 
 import SignupImage from '../../assets/images/signup_image.jpg';
 
@@ -40,6 +41,10 @@ const SignUpFormBase = (props) => {
     }, [username, email, passwordOne, passwordTwo]);
 
     const onSubmit = event => {
+        const roles = {};
+        if (isAdmin) {
+            roles[ROLES.ADMIN] = ROLES.ADMIN;
+        }
         setIsLoading(true);
         props.firebase.doCreateUserWithEmailAndPassword(email, passwordOne)
             .then(authUser => {
@@ -50,6 +55,7 @@ const SignUpFormBase = (props) => {
                     .set({
                         name: username,
                         email: email,
+                        roles: roles,
                     }, { merge: true });
             })
             .then(() => {

@@ -10,13 +10,45 @@ const withAuthorization = condition => Component => {
     const WithAuthorization = (props) => {
         
         useEffect(() => {
-            props.firebase.auth.onAuthStateChanged(
+            /*props.firebase.auth.onAuthStateChanged(
+                authUser => {
+                    if (authUser) {
+                        props.firebase.db
+                            .collection('users')
+                            .doc(authUser.uid)
+                            .get()
+                            .then(snapshot => {
+                                const dbUser = snapshot.data();
+
+                                // default empty roles
+                                if(!dbUser.roles) {
+                                    dbUser.roles = {};
+                                }
+
+                                // merge auth and db user
+                                authUser = {
+                                    uid: authUser.uid,
+                                    email: authUser.email,
+                                    ...dbUser,
+                                };
+
+                                if(!condition(authUser)) {
+                                    props.history.push(ROUTES.LANDING);
+                                }
+                            })
+                    } else {
+                        props.history.push(ROUTES.LANDING);                       
+                    }                    
+                },
+            );*/
+            props.firebase.onAuthUserListener(
                 authUser => {
                     if(!condition(authUser)) {
                         props.history.push(ROUTES.LANDING);
                     }
-                }
-            )
+                },
+                /*() => props.history.push(ROUTES.LANDING),*/
+            );
         },[]);
 
         return (

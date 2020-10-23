@@ -36,26 +36,40 @@ class Firebase {
     doPasswordReset = email => // Reset password
         this.auth.sendPasswordResetEmail(email);
 
-    /*doPasswordUpdate = (oldPassword, password) => {
-        const user = this.auth.currentUser;
-        const cred = app.auth().EmailAuthProvider.credential(user.email, oldPassword);
-        console.log(oldPassword);
-        console.log(password);
-        console.log(cred);
-        console.log(this.auth.currentUser.email);
-        
-        this.auth.currentUser.reauthenticateWithCredential(cred)
-            .then(() => {
-                return this.auth.currentUser.updatePassword(password);
-            })
-            .catch(error => {
-                console.error(error);
-            })
-    }*/
-
     doPasswordUpdate = password => // Change password
         this.auth.currentUser.updatePassword(password);
     
+    // *** Merge Auth and DB User API ***
+
+    onAuthUserListener = (next, fallback) => {
+        this.auth.onAuthStateChanged(authUser => {
+            if(authUser) {
+                this.db.collection('users')
+                    .doc(authUser.uid)
+                    .get()
+                    .then(snapshot => {
+                        const dbUser = snapshot.data();
+
+                        // default empty roles
+                        if (!dbUser.roles) {
+                            dbUser.roles = {};
+                        };
+
+                        // merge auth and db user
+                        authUser = {
+                            uid: authUser.uid,
+                            email: authUser.email,
+                            ...dbUser,
+                        };
+
+                        next(authUser);
+                    });
+        
+            } else {
+                fallback();
+            }
+        });
+    }
 
 }
 

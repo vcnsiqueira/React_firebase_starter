@@ -9,7 +9,7 @@ const Navigation = () => {
         <div>
             <AuthUserContext.Consumer>
                 {authUser => 
-                    authUser ? <NavigationAuth /> : <NavigationNonAuth />
+                    authUser ? <NavigationAuth authUser={authUser}/> : <NavigationNonAuth />
                 }
             </AuthUserContext.Consumer>
         </div>
